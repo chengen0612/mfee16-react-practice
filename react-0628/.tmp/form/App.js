@@ -47,7 +47,7 @@ function App() {
             setDropDown(e.target.value)
           }}
         >
-          {/* 請選擇的部分預設為空值和預設狀態統一 */}
+          {/* 「請選擇」的部分預設為空值和預設狀態統一 */}
           <option value="">請選擇</option>
           <option value="蘋果">蘋果</option>
           <option value="香蕉">香蕉</option>
@@ -74,25 +74,7 @@ function App() {
             setGender(e.target.value)
           }}
         />
-        <lable>male</lable>
-        <input
-          type="radio"
-          value="female"
-          checked={gender === 'female'}
-          onChange={(e) => {
-            setGender(e.target.value)
-          }}
-        />
-        <lable>female</lable>
-        <input
-          type="radio"
-          value="undefined"
-          checked={gender === 'undefined'}
-          onChange={(e) => {
-            setGender(e.target.value)
-          }}
-        />
-        <lable>undefined</lable> */}
+        <lable>male</lable> */}
       </section>
       <section id="checkbox">
         <h3>多選按鈕</h3>
@@ -107,7 +89,6 @@ function App() {
         <label>我同意會員註冊相關規定</label>
 
         <h5>多選選項</h5>
-
         {likeTypes.map((value, i) => {
           return (
             <MyCheckbox
