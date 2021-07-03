@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import Child from './components/Child'
+import Button from './components/Button'
 
 function Parent() {
   // 初始化
@@ -7,21 +7,26 @@ function Parent() {
     // iife
     // only for study
     (function () {
-      console.log('constructor(init)')
+      console.log('App init(total constructor)')
       return 0
     })()
   )
-  const [didMount, setDidMount] = useState(false)
+
+  const [didMount, setDidMount] = useState(
+    (function () {
+      console.log('App init(didMount constructor)')
+      return false
+    })()
+  )
 
   // componentDidMount
   useEffect(() => {
-    console.log('componentDidMount')
+    console.log('App componentDidMount')
     console.log('------------------')
     setDidMount(true)
   }, [])
 
   // componentDidMount + componentDidUpdate
-  // would also fire while initialized
   useEffect(() => {
     // console.log('componentDidUpdate + mix', total)
     // console.log('------------------')
@@ -31,7 +36,7 @@ function Parent() {
   /* eslint-disable */
   useEffect(() => {
     if (didMount === true) {
-      console.log('componentDidUpdate', total)
+      console.log('App componentDidUpdate', total)
       console.log('------------------')
     }
   }, [total])
@@ -42,7 +47,7 @@ function Parent() {
       {
         // iife
         (function () {
-          console.log('render(return)')
+          console.log('App return(render)')
         })()
       }
 
@@ -53,6 +58,8 @@ function Parent() {
       >
         {total}
       </h1>
+      <Button operator="-" total={total} setTotal={setTotal} />
+      <Button operator="+" total={total} setTotal={setTotal} />
     </>
   )
 }
