@@ -45,7 +45,23 @@ const data = [
     stock: 6,
     name: 'Google Pixel 4',
     price: 15500,
-    tags: '安卓,大螢幕',
+    tags: '安卓,小螢幕',
+  },
+  {
+    id: '7',
+    picture: 'http://placehold.it/32x32',
+    stock: 6,
+    name: '紅米',
+    price: 9500,
+    tags: '安卓,一般螢幕',
+  },
+  {
+    id: '8',
+    picture: 'http://placehold.it/32x32',
+    stock: 1,
+    name: '黃米',
+    price: 8800,
+    tags: '安卓,一般螢幕',
   },
 ]
 

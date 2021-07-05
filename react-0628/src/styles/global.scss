@@ -1,3 +1,13 @@
+// to overlay varialbe in source code
+$primary:       #DE3163;
+$secondary:     #FA8072;
+$success:       #6495ED;
+$info:          #9FE2BF;
+$warning:       #FFBF00;
+
+// import bootstrap source code
+@import '~bootstrap/scss/bootstrap.scss';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 28px;
 }
 
 code {
