@@ -1,50 +1,103 @@
 import React, { useState, useEffect } from 'react'
-import { FaSearch } from 'react-icons/fa'
+
 import './App.css'
 import { data } from './data'
-import ProductList from './components/ProductList'
+import DisplayList from './components/DisplayList'
 import Tags from './components/Tags'
 import OrderBy from './components/OrderBy'
 import Budget from './components/Budget'
+import SearchBar from './components/SearchBar'
 
 function App() {
-  // console.log(data)
+  const originalData = data
   const tags = ['大螢幕', '小螢幕', '一般螢幕', '蘋果', '安卓']
   const budget = ['所有', '1萬以下', '1~2萬']
 
-  // filter tags orderBy budget queryStr
-  const originalData = data
-  const [results, setResults] = useState(data)
-  // const [checkedTags, setCheckedTags] = useState([])
+  // queryStr budget tags orderBy
+  const [queryStr, setQueryStr] = useState('')
   const [checkedBudget, setCheckedBudget] = useState('')
+  const [checkedTags, setCheckedTags] = useState([])
+  const [selectedOrder, setSelectedOrder] = useState('')
 
-  useEffect(() => {
-    let newResult = []
+  const [display, setDisplay] = useState(data)
+
+  const queryExecutor = (result) => {
+    // queryStr.toLowerCase()
+    result = result.filter((item) => {
+      return item.name.includes(queryStr)
+    })
+    return result
+  }
+
+  const budgetExecutor = (result) => {
     switch (checkedBudget) {
       case '1萬以下':
-        newResult = originalData.filter((item) => {
-          return item.price < 15000
+        result = result.filter((item) => {
+          return item.price < 10000
         })
-        console.log(newResult)
         break
       case '1~2萬':
+        result = result.filter((item) => {
+          return item.price > 10000 && item.price < 20000
+        })
         break
       default:
-        newResult = originalData
+        break
     }
-    setResults(newResult)
-  }, [checkedBudget, originalData])
+    return result
+  }
+
+  const tagsExecutor = (result) => {
+    result = result.filter((item) => {
+      let isChecked = false
+      const itemTagsArr = item.tags.split(',')
+      for (let i = 0; i < checkedTags.length; i++) {
+        if (itemTagsArr.includes(checkedTags[i])) {
+          isChecked = true
+          break
+        }
+      }
+      return isChecked === true
+    })
+    return result
+  }
+
+  const orderExecutor = (result) => {
+    switch (selectedOrder) {
+      case '依價格排序由低至高':
+        result = [...result].sort((a, b) => a.price - b.price)
+        break
+      case '依價格排序由高至低':
+        result = [...result].sort((a, b) => b.price - a.price)
+        break
+      default:
+        result = [...result].sort((a, b) => a.id - b.id)
+        break
+    }
+    return result
+  }
+
+  /* eslint-disable */
+  useEffect(() => {
+    let result = originalData
+
+    if (queryStr.length > 0) result = queryExecutor(result)
+    result = budgetExecutor(result)
+    if (checkedTags.length > 0) result = tagsExecutor(result)
+    result = orderExecutor(result)
+
+    setDisplay(result)
+  }, [queryStr, checkedBudget, checkedTags, selectedOrder])
+  /* eslint-enable */
 
   return (
     <>
       <div className="container">
         <div className="row">
-          {/* <!-- BEGIN SEARCH RESULT --> */}
           <div className="col-md-12">
             <div className="grid search">
               <div className="grid-body">
                 <div className="row">
-                  {/* <!-- BEGIN FILTERS --> */}
                   <div className="col-md-3">
                     <h2 className="grid-title">
                       <i className="fa fa-filter"></i> Filters
@@ -55,7 +108,7 @@ function App() {
                       return (
                         <Budget
                           key={i}
-                          budget={value}
+                          range={value}
                           checked={checkedBudget}
                           setChecked={setCheckedBudget}
                         />
@@ -63,63 +116,41 @@ function App() {
                     })}
                     <h4 className="mt-4">標籤</h4>
                     {tags.map((value, i) => {
-                      return <Tags key={i} category={value} />
+                      return (
+                        <Tags
+                          key={i}
+                          category={value}
+                          checked={checkedTags}
+                          setChecked={setCheckedTags}
+                        />
+                      )
                     })}
                   </div>
-                  {/* <!-- END FILTERS --> */}
-                  {/* <!-- BEGIN RESULT --> */}
                   <div className="col-md-9">
                     <h2>
-                      <i className="fa fa-file-o"></i> Result
+                      <i className="fa fa-file-o"></i> 篩選結果
                     </h2>
                     <hr />
-                    {/* <!-- BEGIN SEARCH INPUT --> */}
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value="以商品名稱搜尋"
-                        onChange={() => {}}
-                      />
-                      <span className="input-group-btn">
-                        <button className="btn btn-primary" type="button">
-                          <FaSearch className="mb-1" />
-                        </button>
-                      </span>
-                    </div>
-                    {/* <!-- END SEARCH INPUT --> */}
-                    {/* <p>Showing all results matching "web development"</p> */}
-
+                    <SearchBar setQueryStr={setQueryStr} />
                     <div className="padding"></div>
-
-                    <div className="row">
-                      {/* <!-- BEGIN ORDER RESULT --> */}
-                      <div className="col-sm-6">
-                        <select>
-                          <OrderBy />
-                        </select>
-                      </div>
-                      {/* <!-- END ORDER RESULT --> */}
-                    </div>
-
-                    {/* <!-- BEGIN TABLE RESULT --> */}
+                    <OrderBy
+                      selected={selectedOrder}
+                      setSelected={setSelectedOrder}
+                    />
                     <div className="table-responsive">
                       <table className="table table-hover">
                         <tbody>
-                          {results.map((item, i) => {
-                            return <ProductList key={item.id} data={data[i]} />
+                          {display.map((item, i) => {
+                            return <DisplayList key={i} data={item} />
                           })}
                         </tbody>
                       </table>
                     </div>
-                    {/* <!-- END TABLE RESULT --> */}
                   </div>
-                  {/* <!-- END RESULT --> */}
                 </div>
               </div>
             </div>
           </div>
-          {/* <!-- END SEARCH RESULT --> */}
         </div>
       </div>
     </>

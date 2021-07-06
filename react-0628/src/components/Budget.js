@@ -1,16 +1,16 @@
 export default function Budget(props) {
-  const { budget, checked, setChecked } = props
+  const { range, checked, setChecked } = props
   return (
     <>
       <div>
         <input
           type="radio"
-          checked={budget === checked && true}
+          checked={range === checked && true}
           onChange={() => {
-            setChecked(budget)
+            setChecked(range)
           }}
         />
-        <label className="ml-1">{budget}</label>
+        <label className="ml-1">{range}</label>
       </div>
     </>
   )

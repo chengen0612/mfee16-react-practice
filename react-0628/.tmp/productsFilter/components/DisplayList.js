@@ -1,5 +1,5 @@
-export default function ProductList({ data }) {
-  const { id, picture, stock, name, price, tags } = data
+export default function DisplayList({ data }) {
+  const { id, picture, name, price, tags } = data
   return (
     <>
       <tr>

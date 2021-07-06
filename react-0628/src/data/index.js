@@ -12,7 +12,7 @@ const data = [
     picture: 'http://placehold.it/32x32',
     stock: 5,
     name: 'iPhone 12',
-    price: 15000,
+    price: 18000,
     tags: '蘋果,小螢幕',
   },
   {
@@ -20,7 +20,7 @@ const data = [
     picture: 'http://placehold.it/32x32',
     stock: 10,
     name: 'iPhone SE',
-    price: 12500,
+    price: 7000,
     tags: '蘋果,小螢幕',
   },
   {
@@ -28,7 +28,7 @@ const data = [
     picture: 'http://placehold.it/32x32',
     stock: 10,
     name: 'iPhone XS',
-    price: 22000,
+    price: 15000,
     tags: '蘋果,大螢幕',
   },
   {
@@ -36,7 +36,7 @@ const data = [
     picture: 'http://placehold.it/32x32',
     stock: 6,
     name: 'Google Pixel 5',
-    price: 17000,
+    price: 12000,
     tags: '安卓,大螢幕',
   },
   {
@@ -44,7 +44,7 @@ const data = [
     picture: 'http://placehold.it/32x32',
     stock: 6,
     name: 'Google Pixel 4',
-    price: 15500,
+    price: 5000,
     tags: '安卓,大螢幕',
   },
 ]
