@@ -1,0 +1,24 @@
+// to overlay varialbe in source code
+$primary:       #d62828;
+$secondary:     #FA8072;
+$success:       #3f88c5;
+$info:          #9FE2BF;
+$warning:       #ffba08;
+
+// import bootstrap source code
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 28px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
