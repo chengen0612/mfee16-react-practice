@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
 import Login from './pages/Login'
+import Product from './pages/Product'
 
 function App() {
   const [auth, setAuth] = useState(false)
@@ -14,6 +15,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/login">Login</Link>
+        <Link to="/product">Product</Link>
 
         <Switch>
           <Route exact path="/">
@@ -24,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <Login auth={auth} setAuth={setAuth} />
+          </Route>
+          <Route path="/product/:id?">
+            <Product auth={auth} />
           </Route>
         </Switch>
       </>
