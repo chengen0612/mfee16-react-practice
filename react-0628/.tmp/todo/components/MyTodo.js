@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 export default function ToDoApp() {
   // todo = { id: number, text:string, completed: bool, edited: false }
@@ -8,8 +8,6 @@ export default function ToDoApp() {
   ])
 
   const [text, setText] = useState('')
-
-  const inputContent = useRef(null)
 
   const handleAddTodo = (e) => {
     if (e.key === 'Enter') {
@@ -54,14 +52,12 @@ export default function ToDoApp() {
 
     if (index > -1) {
       newTodos[index].edited = !newTodos[index].edited
-      // const symbol = inputContent.current.value || null
-      // if (symbol.length > 0) newTodos[index].text = symbol
-      // newTodos[index].text = text
+      newTodos[index].text = text
       setTodos(newTodos)
     }
   }
 
-  const editedTodoInput = () => {
+  const editedTodoInput = (text, setText) => {
     return (
       <>
         <input
@@ -70,7 +66,6 @@ export default function ToDoApp() {
           onChange={(e) => {
             setText(e.target.value)
           }}
-          ref={inputContent}
         />
       </>
     )
@@ -104,7 +99,7 @@ export default function ToDoApp() {
                 }}
               >
                 {item.edited ? (
-                  editedTodoInput()
+                  editedTodoInput(text, setText)
                 ) : item.completed ? (
                   <del>{item.text}</del>
                 ) : (

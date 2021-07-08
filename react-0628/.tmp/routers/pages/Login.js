@@ -1,5 +1,4 @@
 import { withRouter } from 'react-router-dom'
-import Breadcrumb from '../components/Breadcrumb'
 
 function Login(props) {
   // 觀察 HOC 的狀態
@@ -10,7 +9,6 @@ function Login(props) {
   return (
     <>
       <h1>Login</h1>
-      <Breadcrumb />
       <h3>目前登入狀況: {auth ? '登入' : '登出'}</h3>
       {auth ? (
         <button
@@ -24,7 +22,7 @@ function Login(props) {
         <button
           onClick={() => {
             setAuth(true)
-            props.history.push('/product')
+            props.history.push('/about')
           }}
         >
           登入
