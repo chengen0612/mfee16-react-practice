@@ -1,41 +1,15 @@
-import { withRouter } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 
-const data = [
-  {
-    id: 1,
-    name: '咖啡色 T-shirt',
-    catgory: 'Shirt',
-    image: 'https://i.imgur.com/1GrakTl.jpg',
-    price: 300,
-  },
-  {
-    id: 2,
-    name: '白色 T-shirt',
-    catgory: 'Shirt',
-    image: 'https://i.imgur.com/ba3tvGm.jpg',
-    price: 200,
-  },
-  {
-    id: 3,
-    name: '黑色 T-shirt',
-    catgory: 'Shirt',
-    image: 'https://i.imgur.com/pHQ3xT3.jpg',
-    price: 450,
-  },
-  {
-    id: 4,
-    name: '金色 T-shirt',
-    catgory: 'Shirt',
-    image: 'https://i.imgur.com/pHQ3xT3.jpg',
-    price: 1200,
-  },
-]
+import { data } from '../data/shirts'
+
+import Breadcrumb from '../components/Breadcrumb'
 
 function Product(props) {
   const { auth } = props
-  const queryId = +props.match.params.id
-  console.log(props)
+
+  // get parameters
+  const paramsId = +props.match.params.id
 
   const [product, setProduct] = useState({
     id: 0,
@@ -48,7 +22,7 @@ function Product(props) {
   /* eslint-disable */
   useEffect(() => {
     const index = data.findIndex((item) => {
-      return item.id === queryId
+      return item.id === paramsId
     })
     if (index > -1) setProduct(data[index])
   }, [])
@@ -57,12 +31,13 @@ function Product(props) {
   return (
     <>
       <h1>Product</h1>
+      <Breadcrumb />
       <h3>目前登入狀況: {auth ? '登入' : '登出'}</h3>
-      {product && (
+      {product.id !== 0 && (
         <>
-          <h5>查詢商品 id {product.Id}</h5>
+          <h5>查詢商品 id {product.id}</h5>
           <h4>{product.name}</h4>
-          <img src={product.image} alt="" />
+          <img src={product.image} alt="" style={{ width: 300, height: 300 }} />
         </>
       )}
     </>
