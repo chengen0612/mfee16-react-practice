@@ -24,6 +24,7 @@ function Login(props) {
         <button
           onClick={() => {
             setAuth(true)
+            // redirect
             props.history.push('/product')
           }}
         >
@@ -34,5 +35,5 @@ function Login(props) {
   )
 }
 
-// HOC(高階元件)，用於綁入 Router 中的三個屬性值
+// HOC(高階元件)，用於取得 Router 中的三個屬性值
 export default withRouter(Login)

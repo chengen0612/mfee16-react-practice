@@ -4,8 +4,8 @@ function Breadcrumb(props) {
   // console.log(props.location)
 
   // 建立對照陣列
-  // const pathnameList = ['/about', '/login', 'product']
-  // const pathnameZhList = ['關於我們', '會員登入', '商品']
+  const pathnameList = ['/about', '/login', 'product']
+  const pathnameZhList = ['關於我們', '會員登入', '商品']
 
   // const convertPathnameToZh = () => {
   //   const index = pathnameList.map((value) => {
@@ -14,7 +14,14 @@ function Breadcrumb(props) {
   //   return pathnameZhList[index]
   // }
 
-  // console.log(convertPathnameToZh)
+  const converPathnameToZh = () => {
+    const index = pathnameList.findIndex((value) => {
+      return props.location.pathname.includes(value)
+    })
+    if (index > -1) return pathnameZhList[index]
+  }
+
+  console.log(converPathnameToZh)
 
   return (
     <>

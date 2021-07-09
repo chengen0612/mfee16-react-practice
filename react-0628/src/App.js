@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+
 import React, { useState } from 'react'
 
 // pages
@@ -21,6 +22,7 @@ function App() {
         <Link to="/product">Product</Link>
 
         <Switch>
+          {/* redirect */}
           <Route exact path="/">
             <Home auth={auth} />
           </Route>
@@ -30,9 +32,11 @@ function App() {
           <Route exact path="/login">
             <Login auth={auth} setAuth={setAuth} />
           </Route>
-          <Route path="/product/nature/:id?">
+          {/* query string */}
+          <Route path="/product/nature">
             <ProductNature auth={auth} />
           </Route>
+          {/* parameter */}
           <Route path="/product/:id?">
             <Product auth={auth} />
           </Route>
